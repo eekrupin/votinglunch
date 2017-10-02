@@ -23,7 +23,7 @@ LunchMenu extends BaseEntity:
 Dish extends BaseEntity:
   - menu_id
 
-ConsistMenu extends BaseEntity:
+MenuConsist extends BaseEntity:
   - date (without time)
   - restaurant_id
   - menu_id
