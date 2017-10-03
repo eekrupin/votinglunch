@@ -8,7 +8,6 @@ import org.hibernate.validator.constraints.SafeHtml;
 import javax.persistence.*;
 
 @MappedSuperclass
-
 @Access(AccessType.FIELD)
 public abstract class AbstractBaseEntity implements HasId{
 

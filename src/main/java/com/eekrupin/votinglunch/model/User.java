@@ -15,20 +15,21 @@ import java.util.Set;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = User.DELETE, query = "DELETE FROM User u WHERE u.id=:id"),
-        @NamedQuery(name = User.MARK, query = "UPDATE User u SET u.deletionMark = true WHERE u.id=:id"),
-        @NamedQuery(name = User.UNMARK, query = "UPDATE User u SET u.deletionMark = false WHERE u.id=:id"),
         @NamedQuery(name = User.BY_EMAIL, query = "SELECT u FROM User u WHERE u.email=:email")
+//        @NamedQuery(name = User.DELETE, query = "DELETE FROM User u WHERE u.id=:id"),
+//        @NamedQuery(name = User.MARK, query = "UPDATE User u SET u.deletionMark = true WHERE u.id=:id"),
+//        @NamedQuery(name = User.UNMARK, query = "UPDATE User u SET u.deletionMark = false WHERE u.id=:id"),
+//        @NamedQuery(name = User.ALL, query = "SELECT u FROM User u")
 })
-
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
 public class User extends AbstractReferenceEntity{
 
-    public static final String DELETE = "User.delete";
-    public static final String MARK = "User.mark";
-    public static final String UNMARK = "User.unmark";
     public static final String BY_EMAIL = "User.getByEmail";
-    public static final String ALL = "User.getAll";
+
+//    public static final String DELETE = "User.delete";
+//    public static final String MARK = "User.mark";
+//    public static final String UNMARK = "User.unmark";
+//    public static final String ALL = "User.getAll";
 
     @Column(name = "email", nullable = false, unique = true)
     @Email
@@ -42,7 +43,7 @@ public class User extends AbstractReferenceEntity{
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     @BatchSize(size = 200)
