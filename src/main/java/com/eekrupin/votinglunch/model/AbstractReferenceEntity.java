@@ -12,6 +12,18 @@ public abstract class AbstractReferenceEntity extends AbstractBaseEntity {
     @SafeHtml
     protected String description;
 
+    public AbstractReferenceEntity() {
+    }
+
+    public AbstractReferenceEntity(Integer id) {
+        super(id);
+    }
+
+    public AbstractReferenceEntity(Integer id, String description) {
+        super(id);
+        this.description = description;
+    }
+
     public String getDescription() {
         return description;
     }
