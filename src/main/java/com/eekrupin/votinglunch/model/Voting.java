@@ -6,12 +6,11 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.text.Format;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "dishes")
-public class MenuConsist extends AbstractBaseEntity{
+@Table(name = "voting")
+public class Voting extends AbstractBaseEntity{
 
     @Column(name = "date", nullable = false)
     private LocalDate date;
@@ -23,35 +22,27 @@ public class MenuConsist extends AbstractBaseEntity{
     private Restaurant restaurant;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "menu_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
-    private LunchMenu lunchMenu;
+    private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dish_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @NotNull
-    private Dish dish;
-
-    public MenuConsist() {
+    public Voting() {
     }
 
-    public MenuConsist(Integer id, Restaurant restaurant, LunchMenu lunchMenu, Dish dish) {
+    public Voting(Integer id, Restaurant restaurant, User user) {
         super(id);
         this.restaurant = restaurant;
-        this.lunchMenu = lunchMenu;
-        this.dish = dish;
+        this.user = user;
     }
 
     @Override
     public String toString() {
-        return "LunchMenu{" +
+        return "Voting{" +
                 "id='" + getId() + '\'' +
                 "date='" + DateUtil.toString(getDate()) + '\'' +
                 "restaurant='" + (getRestaurant().isNew() ? "(new)" : getRestaurant().description) + '\'' +
-                "lunchMenu='" + (getLunchMenu().isNew() ? "(new)" : getLunchMenu().description) + '\'' +
-                "dish='" + (getDish().isNew() ? "(new)" : getDish().description) + '\'' +
+                "user='" + (getUser().isNew() ? "(new)" : getUser().description) + '\'' +
                 '}';
     }
 
@@ -71,20 +62,11 @@ public class MenuConsist extends AbstractBaseEntity{
         this.restaurant = restaurant;
     }
 
-    public LunchMenu getLunchMenu() {
-        return lunchMenu;
+    public User getUser() {
+        return user;
     }
 
-    public void setLunchMenu(LunchMenu lunchMenu) {
-        this.lunchMenu = lunchMenu;
+    public void setUser(User user) {
+        this.user = user;
     }
-
-    public Dish getDish() {
-        return dish;
-    }
-
-    public void setDish(Dish dish) {
-        this.dish = dish;
-    }
-
 }
