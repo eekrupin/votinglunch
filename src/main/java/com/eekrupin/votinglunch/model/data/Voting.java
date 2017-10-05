@@ -1,5 +1,8 @@
-package com.eekrupin.votinglunch.model;
+package com.eekrupin.votinglunch.model.data;
 
+import com.eekrupin.votinglunch.model.AbstractBaseEntity;
+import com.eekrupin.votinglunch.model.Restaurant;
+import com.eekrupin.votinglunch.model.User;
 import com.eekrupin.votinglunch.util.DateUtil;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -10,7 +13,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "voting")
-public class Voting extends AbstractBaseEntity{
+public class Voting extends AbstractBaseEntity {
 
     @Column(name = "date", nullable = false)
     private LocalDate date;
@@ -41,8 +44,8 @@ public class Voting extends AbstractBaseEntity{
         return "Voting{" +
                 "id='" + getId() + '\'' +
                 "date='" + DateUtil.toString(getDate()) + '\'' +
-                "restaurant='" + (getRestaurant().isNew() ? "(new)" : getRestaurant().description) + '\'' +
-                "user='" + (getUser().isNew() ? "(new)" : getUser().description) + '\'' +
+                "restaurant='" + (getRestaurant().isNew() ? "(new)" : getRestaurant().getDescription()) + '\'' +
+                "user='" + (getUser().isNew() ? "(new)" : getUser().getDescription()) + '\'' +
                 '}';
     }
 

@@ -1,5 +1,9 @@
-package com.eekrupin.votinglunch.model;
+package com.eekrupin.votinglunch.model.data;
 
+import com.eekrupin.votinglunch.model.AbstractBaseEntity;
+import com.eekrupin.votinglunch.model.Dish;
+import com.eekrupin.votinglunch.model.LunchMenu;
+import com.eekrupin.votinglunch.model.Restaurant;
 import com.eekrupin.votinglunch.util.DateUtil;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -10,8 +14,8 @@ import java.text.Format;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "dishes")
-public class MenuConsist extends AbstractBaseEntity{
+@Table(name = "menuconsist")
+public class MenuConsist extends AbstractBaseEntity {
 
     @Column(name = "date", nullable = false)
     private LocalDate date;
@@ -49,9 +53,9 @@ public class MenuConsist extends AbstractBaseEntity{
         return "LunchMenu{" +
                 "id='" + getId() + '\'' +
                 "date='" + DateUtil.toString(getDate()) + '\'' +
-                "restaurant='" + (getRestaurant().isNew() ? "(new)" : getRestaurant().description) + '\'' +
-                "lunchMenu='" + (getLunchMenu().isNew() ? "(new)" : getLunchMenu().description) + '\'' +
-                "dish='" + (getDish().isNew() ? "(new)" : getDish().description) + '\'' +
+                "restaurant='" + (getRestaurant().isNew() ? "(new)" : getRestaurant().getDescription()) + '\'' +
+                "lunchMenu='" + (getLunchMenu().isNew() ? "(new)" : getLunchMenu().getDescription()) + '\'' +
+                "dish='" + (getDish().isNew() ? "(new)" : getDish().getDescription()) + '\'' +
                 '}';
     }
 
