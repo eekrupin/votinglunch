@@ -1,8 +1,6 @@
 package com.eekrupin.votinglunch.repository.interfaces;
 
-import com.eekrupin.votinglunch.model.LunchMenu;
 import com.eekrupin.votinglunch.model.Restaurant;
-import com.eekrupin.votinglunch.model.data.MenuConsist;
 import com.eekrupin.votinglunch.model.data.Voting;
 
 import java.time.LocalDate;
