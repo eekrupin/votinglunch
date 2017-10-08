@@ -13,6 +13,7 @@ import javax.persistence.*;
 //        @NamedQuery(name = AbstractReferenceEntity.UNMARK, query = "UPDATE AbstractReferenceEntity el SET el.deletionMark = false WHERE el.id=:id"),
 //        @NamedQuery(name = AbstractReferenceEntity.ALL, query = "SELECT el FROM AbstractReferenceEntity el")
 //})
+//@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class AbstractReferenceEntity extends AbstractBaseEntity {
 
 //    public static final String DELETE = "Ref.delete";

@@ -12,7 +12,7 @@ public abstract interface ReferenceRepository <T>{
 
     List<T> getAll();
 
-    void Mark();
+    void mark(T reference);
 
-    void Unmark();
+    void unMark(T reference);
 }
