@@ -17,7 +17,9 @@ public interface CrudReferenceRepository <T extends AbstractReferenceEntity> ext
     @Query("DELETE FROM AbstractReferenceEntity el WHERE el.id=:id")
     int delete(@Param("id") int id);
 
-    T save(T reference);
+    @Override
+    @Transactional
+    <S extends T> S save(S reference);
 
     T getById(int id);
 

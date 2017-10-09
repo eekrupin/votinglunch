@@ -52,6 +52,10 @@ public class User extends AbstractReferenceEntity{
     public User() {
     }
 
+    public User(Integer id, String description, String email, String password, Role role, Role... roles) {
+        this(id, description, email, password, EnumSet.of(role, roles));
+    }
+
     public User(Integer id, String description, String email, String password, Collection<Role> roles) {
         super(id, description);
         this.email = email;

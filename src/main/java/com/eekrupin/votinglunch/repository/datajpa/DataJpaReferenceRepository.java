@@ -12,8 +12,15 @@ import java.util.List;
 public abstract class DataJpaReferenceRepository <T extends AbstractReferenceEntity> implements ReferenceRepository<T>{
 
     @Autowired
-    private
-    CrudReferenceRepository<T> crudReferenceRepository;
+    private CrudReferenceRepository<T> crudReferenceRepository;
+
+    public void setCrudReferenceRepository(CrudReferenceRepository<T> crudReferenceRepository) {
+        this.crudReferenceRepository = crudReferenceRepository;
+    }
+
+    CrudReferenceRepository<T> getCrudReferenceRepository() {
+        return crudReferenceRepository;
+    }
 
     @Override
     @Transactional
