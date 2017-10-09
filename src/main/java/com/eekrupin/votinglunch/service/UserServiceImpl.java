@@ -34,4 +34,7 @@ public class UserServiceImpl implements UserService{
         Assert.notNull(email, "email must not be null");
         return ValidationUtil.checkNotFound(repository.getByEmail(email), "email=" + email);
     }
+
+
+
 }
