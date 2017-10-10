@@ -7,9 +7,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@NamedQueries({
-        @NamedQuery(name = LunchMenu.ALL, query = "SELECT el FROM LunchMenu el where el.restaurant = :restaurant")
-})
+//@NamedQueries({
+//        @NamedQuery(name = LunchMenu.ALL, query = "SELECT el FROM LunchMenu el where el.restaurant = :restaurant")
+//})
 @Table(name = "lunchmenus")
 public class LunchMenu extends AbstractReferenceEntity{
 
