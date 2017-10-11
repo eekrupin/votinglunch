@@ -10,19 +10,18 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Transactional(readOnly = true)
-public interface CrudReferenceRepository <T extends AbstractReferenceEntity> extends JpaRepository<T, Integer>{
+public interface CrudReferenceRepository <T extends AbstractReferenceEntity>{
 
     @Modifying
     @Transactional
-    @Query("DELETE FROM AbstractReferenceEntity el WHERE el.id=:id")
-    int delete(@Param("id") int id);
+    //@Query("DELETE FROM AbstractReferenceEntity el WHERE el.id=:id")
+    int deleteById(int id);
 
-    @Override
     @Transactional
     <S extends T> S save(S reference);
 
     T getById(int id);
 
-    List<T> getAll();
+    List<T> findAll();
 
 }

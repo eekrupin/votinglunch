@@ -8,13 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Repository
 public abstract class DataJpaReferenceRepository <T extends AbstractReferenceEntity> implements ReferenceRepository<T>{
 
-    @Autowired
     private CrudReferenceRepository<T> crudReferenceRepository;
 
-    public void setCrudReferenceRepository(CrudReferenceRepository<T> crudReferenceRepository) {
+    public DataJpaReferenceRepository(CrudReferenceRepository<T> crudReferenceRepository) {
         this.crudReferenceRepository = crudReferenceRepository;
     }
 
@@ -30,17 +28,17 @@ public abstract class DataJpaReferenceRepository <T extends AbstractReferenceEnt
 
     @Override
     public boolean delete(int id) {
-        return crudReferenceRepository.delete(id)!=0;
+        return crudReferenceRepository.deleteById(id)!=0;
     }
 
     @Override
     public T get(int id) {
-        return crudReferenceRepository.getOne(id);
+        return crudReferenceRepository.getById(id);
     }
 
     @Override
     public List<T> getAll() {
-        return crudReferenceRepository.getAll();
+        return crudReferenceRepository.findAll();
     }
 
     @Override
