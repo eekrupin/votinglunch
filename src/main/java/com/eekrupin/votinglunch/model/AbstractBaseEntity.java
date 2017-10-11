@@ -2,8 +2,7 @@ package com.eekrupin.votinglunch.model;
 
 import com.eekrupin.votinglunch.web.HasId;
 import org.hibernate.Hibernate;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.SafeHtml;
+import javax.validation.constraints.NotBlank;
 
 import javax.persistence.*;
 
@@ -19,7 +18,6 @@ public abstract class AbstractBaseEntity implements HasId{
     @Access(value = AccessType.PROPERTY)
     private Integer id;
 
-    @NotBlank
     @Column(name = "deletionMark", nullable = false)
     private Boolean deletionMark;
 

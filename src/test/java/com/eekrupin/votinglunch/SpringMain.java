@@ -18,6 +18,13 @@ public class SpringMain {
             AdminRestController adminRestController = appCtx.getBean(AdminRestController.class);
             User created = adminRestController.create(new User(null, "test01", "email@mail.com", "pass", Role.ROLE_ADMIN));
             System.out.println("created:" + created.toString());
+
+            //adminRestController.
+
+            User got = adminRestController.get(created.getId());
+            System.out.println("got:" + got.toString());
+            User gotByEmail = adminRestController.getByEmail("email@mail.com");
+            System.out.println("gotByEmail:" + gotByEmail.toString());
         }
     }
 }
