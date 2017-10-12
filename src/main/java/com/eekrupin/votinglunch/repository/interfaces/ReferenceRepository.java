@@ -6,6 +6,8 @@ import java.util.List;
 public abstract interface ReferenceRepository <T>{
     T save(T reference);
 
+    void update(T reference);
+
     boolean delete(int id);
 
     T get(int id);
