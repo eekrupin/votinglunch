@@ -25,6 +25,15 @@ public class SpringMain {
             System.out.println("got:" + got.toString());
             User gotByEmail = adminRestController.getByEmail("email@mail.com");
             System.out.println("gotByEmail:" + gotByEmail.toString());
+
+            adminRestController.mark(created.getId());
+            System.out.println("marked:" + adminRestController.get(created.getId()).isDeletionMark());
+
+            adminRestController.unMark(created.getId());
+            System.out.println("unMark:" + adminRestController.get(created.getId()).isDeletionMark());
+
+            System.out.println("Delete");
+            adminRestController.delete(created.getId());
         }
     }
 }

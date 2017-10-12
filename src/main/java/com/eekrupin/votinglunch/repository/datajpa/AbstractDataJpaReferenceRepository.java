@@ -1,22 +1,20 @@
 package com.eekrupin.votinglunch.repository.datajpa;
 
 import com.eekrupin.votinglunch.model.AbstractReferenceEntity;
-import com.eekrupin.votinglunch.repository.interfaces.ReferenceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import com.eekrupin.votinglunch.repository.interfaces.AbstractReferenceRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public abstract class DataJpaReferenceRepository <T extends AbstractReferenceEntity> implements ReferenceRepository<T>{
+public abstract class AbstractDataJpaReferenceRepository<T extends AbstractReferenceEntity> implements AbstractReferenceRepository<T> {
 
-    private CrudReferenceRepository<T> crudReferenceRepository;
+    private AbstractCrudReferenceRepository<T> crudReferenceRepository;
 
-    public DataJpaReferenceRepository(CrudReferenceRepository<T> crudReferenceRepository) {
+    public AbstractDataJpaReferenceRepository(AbstractCrudReferenceRepository<T> crudReferenceRepository) {
         this.crudReferenceRepository = crudReferenceRepository;
     }
 
-    CrudReferenceRepository<T> getCrudReferenceRepository() {
+    AbstractCrudReferenceRepository<T> getCrudReferenceRepository() {
         return crudReferenceRepository;
     }
 

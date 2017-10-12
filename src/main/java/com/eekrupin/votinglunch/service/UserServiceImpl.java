@@ -9,24 +9,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 @Service("userService")
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl extends AbstractBaseServiceImpl<User> implements UserService{
 
     private final UserRepository repository;
 
     @Autowired
     public UserServiceImpl(UserRepository repository) {
+        super(repository);
         this.repository = repository;
-    }
-
-    @Override
-    public User create(User user) {
-        Assert.notNull(user, "user must not be null");
-        return repository.save(user);
-    }
-
-    @Override
-    public User get(int id) throws NotFoundException {
-        return ValidationUtil.checkNotFoundWithId(repository.get(id), id);
     }
 
     @Override
