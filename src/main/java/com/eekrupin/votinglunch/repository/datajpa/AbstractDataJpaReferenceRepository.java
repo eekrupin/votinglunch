@@ -1,13 +1,16 @@
 package com.eekrupin.votinglunch.repository.datajpa;
 
-import com.eekrupin.votinglunch.model.AbstractReferenceEntity;
+import com.eekrupin.votinglunch.model.ReferenceEntity;
 import com.eekrupin.votinglunch.repository.interfaces.AbstractReferenceRepository;
+import com.eekrupin.votinglunch.util.exception.NotFoundException;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public abstract class AbstractDataJpaReferenceRepository<T extends AbstractReferenceEntity> implements AbstractReferenceRepository<T> {
+import static com.eekrupin.votinglunch.util.ValidationUtil.checkNotFoundWithId;
+
+public abstract class AbstractDataJpaReferenceRepository<T extends ReferenceEntity> implements AbstractReferenceRepository<T> {
 
     private static final Sort SORT_ID = new Sort("id");
 
@@ -33,8 +36,8 @@ public abstract class AbstractDataJpaReferenceRepository<T extends AbstractRefer
     }
 
     @Override
-    public T get(int id) {
-        return crudReferenceRepository.getById(id);
+    public T get(int id) throws NotFoundException {
+        return checkNotFoundWithId(crudReferenceRepository.getById(id), id);
     }
 
     @Override

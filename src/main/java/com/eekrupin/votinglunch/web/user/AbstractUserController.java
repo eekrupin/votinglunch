@@ -1,15 +1,10 @@
 package com.eekrupin.votinglunch.web.user;
 
 import com.eekrupin.votinglunch.model.User;
-import com.eekrupin.votinglunch.service.BaseService;
 import com.eekrupin.votinglunch.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.eekrupin.votinglunch.web.AbstractBaseController;
 
-import static com.eekrupin.votinglunch.util.ValidationUtil.checkNew;
-
-public class AbstractUserController extends AbstractBaseController<User>{
+public class AbstractUserController extends AbstractBaseController<User> {
 
     private UserService service;
 

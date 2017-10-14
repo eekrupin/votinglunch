@@ -1,4 +1,4 @@
-package com.eekrupin.votinglunch.web.user;
+package com.eekrupin.votinglunch.web;
 
 import com.eekrupin.votinglunch.model.AbstractBaseEntity;
 import com.eekrupin.votinglunch.service.BaseService;
@@ -12,11 +12,11 @@ import static com.eekrupin.votinglunch.util.ValidationUtil.checkNew;
 
 public abstract class AbstractBaseController<T extends AbstractBaseEntity> {
 
-    final Logger log = LoggerFactory.getLogger(getClass());
+    protected final Logger log = LoggerFactory.getLogger(getClass());
 
     private BaseService<T> service;
 
-    AbstractBaseController(BaseService<T> service) {
+    protected AbstractBaseController(BaseService<T> service) {
          this.service = service;
     }
 

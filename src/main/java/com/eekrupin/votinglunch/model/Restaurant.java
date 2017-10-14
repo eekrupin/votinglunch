@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = "description", name = "restaurant_unique_description_idx")})
-public class Restaurant extends AbstractReferenceEntity{
+public class Restaurant extends ReferenceEntity {
 
     public Restaurant() {
     }

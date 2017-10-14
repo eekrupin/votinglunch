@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 //        @NamedQuery(name = Dish.ALL, query = "SELECT el FROM Dish el where el.lunchMenu = :lunchMenu")
 //})
 @Table(name = "dishes")
-public class Dish extends AbstractReferenceEntity{
+public class Dish extends ReferenceEntity {
 
     public static final String ALL = "Dish.getAll";
 

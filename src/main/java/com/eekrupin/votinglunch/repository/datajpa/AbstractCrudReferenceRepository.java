@@ -1,8 +1,7 @@
 package com.eekrupin.votinglunch.repository.datajpa;
 
-import com.eekrupin.votinglunch.model.AbstractReferenceEntity;
+import com.eekrupin.votinglunch.model.ReferenceEntity;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Transactional(readOnly = true)
-public abstract interface AbstractCrudReferenceRepository<T extends AbstractReferenceEntity>{
+public abstract interface AbstractCrudReferenceRepository<T extends ReferenceEntity>{
 
     @Modifying
     @Transactional

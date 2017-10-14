@@ -21,14 +21,4 @@ public class DataJpaUserRepositoryImpl extends AbstractDataJpaReferenceRepositor
         return crudUserRepository.getByEmail(email);
     }
 
-//    CrudUserRepository getCrudUserRepository() {
-//        return crudUserRepository;
-//    }
-//
-//    @Autowired
-//    public void setCrudUserRepository(CrudUserRepository crudUserRepository) {
-//        this.crudUserRepository = crudUserRepository;
-//    }
-
-
 }

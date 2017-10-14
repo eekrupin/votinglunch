@@ -14,7 +14,7 @@ import javax.persistence.*;
 //})
 //@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.FIELD)
-public abstract class AbstractReferenceEntity extends AbstractBaseEntity {
+public class ReferenceEntity extends AbstractBaseEntity {
 
 //    public static final String DELETE = "Ref.delete";
 //    public static final String MARK = "Ref.mark";
@@ -26,14 +26,14 @@ public abstract class AbstractReferenceEntity extends AbstractBaseEntity {
     @SafeHtml
     protected String description;
 
-    public AbstractReferenceEntity() {
+    public ReferenceEntity() {
     }
 
-    public AbstractReferenceEntity(Integer id) {
+    public ReferenceEntity(Integer id) {
         super(id);
     }
 
-    public AbstractReferenceEntity(Integer id, String description) {
+    public ReferenceEntity(Integer id, String description) {
         super(id);
         this.description = description;
     }

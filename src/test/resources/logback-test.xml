@@ -23,7 +23,7 @@
 
     <logger name="org.postgresql" level="debug"/>
     <logger name="org.springframework.jdbc" level="debug"/>
-
+    <logger name="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver" level="debug"/>
     <logger name="com.eekrupin.votinglunch." level="debug"/>
 
     <root level="INFO">

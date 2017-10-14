@@ -1,5 +1,6 @@
 package com.eekrupin.votinglunch.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -8,10 +9,7 @@ import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 //@NamedQueries({
@@ -22,7 +20,7 @@ import java.util.Set;
 ////        @NamedQuery(name = User.ALL, query = "SELECT u FROM User u")
 //})
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
-public class User extends AbstractReferenceEntity{
+public class User extends ReferenceEntity {
 
 //    public static final String BY_EMAIL = "User.getByEmail";
 
@@ -40,6 +38,7 @@ public class User extends AbstractReferenceEntity{
     @Column(name = "password", nullable = false)
     @NotBlank
     @Size(min = 3)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -50,6 +49,11 @@ public class User extends AbstractReferenceEntity{
     private Set<Role> roles;
 
     public User() {
+    }
+
+    public User(User u) {
+        this(u.getId(), u.getDescription(), u.getEmail(), u.getPassword(), u.getRoles());
+        this.setDeletionMark(u.isDeletionMark());
     }
 
     public User(Integer id, String description, String email, String password, Role role, Role... roles) {
