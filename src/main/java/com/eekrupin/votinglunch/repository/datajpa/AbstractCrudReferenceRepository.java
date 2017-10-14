@@ -1,6 +1,7 @@
 package com.eekrupin.votinglunch.repository.datajpa;
 
 import com.eekrupin.votinglunch.model.AbstractReferenceEntity;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -24,6 +25,6 @@ public abstract interface AbstractCrudReferenceRepository<T extends AbstractRefe
 
     T getById(int id);
 
-    List<T> findAll();
+    List<T> findAll(Sort sort);
 
 }

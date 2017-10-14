@@ -2,7 +2,7 @@ package com.eekrupin.votinglunch.util;
 
 
 import com.eekrupin.votinglunch.util.exception.NotFoundException;
-import com.eekrupin.votinglunch.web.HasId;
+import com.eekrupin.votinglunch.HasId;
 
 public class ValidationUtil {
 

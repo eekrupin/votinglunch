@@ -1,4 +1,4 @@
-package com.eekrupin.votinglunch.web;
+package com.eekrupin.votinglunch;
 
 public interface HasId {
     Integer getId();

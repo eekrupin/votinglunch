@@ -1,8 +1,7 @@
 package com.eekrupin.votinglunch.model;
 
-import com.eekrupin.votinglunch.web.HasId;
+import com.eekrupin.votinglunch.HasId;
 import org.hibernate.Hibernate;
-import javax.validation.constraints.NotBlank;
 
 import javax.persistence.*;
 

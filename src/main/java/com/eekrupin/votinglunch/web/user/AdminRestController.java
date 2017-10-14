@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 public class AdminRestController extends AbstractUserController{
-    static final String REST_URL = "/rest/admin/users";
+    public static final String REST_URL = "/rest/admin/users";
 
     @Autowired
     public AdminRestController(UserService service) {

@@ -2,11 +2,14 @@ package com.eekrupin.votinglunch.repository.datajpa;
 
 import com.eekrupin.votinglunch.model.AbstractReferenceEntity;
 import com.eekrupin.votinglunch.repository.interfaces.AbstractReferenceRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public abstract class AbstractDataJpaReferenceRepository<T extends AbstractReferenceEntity> implements AbstractReferenceRepository<T> {
+
+    private static final Sort SORT_ID = new Sort("id");
 
     private AbstractCrudReferenceRepository<T> crudReferenceRepository;
 
@@ -36,7 +39,7 @@ public abstract class AbstractDataJpaReferenceRepository<T extends AbstractRefer
 
     @Override
     public List<T> getAll() {
-        return crudReferenceRepository.findAll();
+        return crudReferenceRepository.findAll(SORT_ID);
     }
 
     @Override
