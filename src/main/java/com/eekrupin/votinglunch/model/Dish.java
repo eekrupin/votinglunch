@@ -39,7 +39,7 @@ public class Dish extends ReferenceEntity {
 
     @Override
     public String toString() {
-        return "LunchMenu{" +
+        return "Dish{" +
                 "id='" + getId() + '\'' +
                 "restaurant='" + (restaurant.isNew() ? "(new)" : restaurant.description) + '\'' +
                 "description='" + description + '\'' +

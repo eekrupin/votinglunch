@@ -1,5 +1,7 @@
 package com.eekrupin.votinglunch.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -39,9 +41,9 @@ public class LunchMenu extends ReferenceEntity {
 
     @Override
     public String toString() {
-        return "Restaurant{" +
+        return "LunchMenu{" +
                 "id='" + getId() + '\'' +
-                "restaurant='" + (restaurant.isNew() ? "(new)" : restaurant.description) + '\'' +
+                "restaurant='" + restaurant.toString() + '\'' +
                 "description='" + description + '\'' +
                 '}';
     }

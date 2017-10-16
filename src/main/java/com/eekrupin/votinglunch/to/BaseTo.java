@@ -5,6 +5,8 @@ import com.eekrupin.votinglunch.HasId;
 public abstract class BaseTo implements HasId {
     protected Integer id;
 
+    protected Boolean deletionMark;
+
     public BaseTo() {
     }
 
@@ -21,4 +23,13 @@ public abstract class BaseTo implements HasId {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public boolean isDeletionMark() {
+        return deletionMark;
+    }
+
+    public void setDeletionMark(Boolean deletionMark) {
+        this.deletionMark = deletionMark;
+    }
+
 }

@@ -50,7 +50,7 @@ public class MenuConsist extends AbstractBaseEntity {
 
     @Override
     public String toString() {
-        return "LunchMenu{" +
+        return "MenuConsist{" +
                 "id='" + getId() + '\'' +
                 "date='" + DateUtil.toString(getDate()) + '\'' +
                 "restaurant='" + (getRestaurant().isNew() ? "(new)" : getRestaurant().getDescription()) + '\'' +

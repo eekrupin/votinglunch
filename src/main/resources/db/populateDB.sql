@@ -1,3 +1,5 @@
+DELETE FROM lunchmenus;
+DELETE FROM restaurants;
 DELETE FROM user_roles;
 DELETE FROM users;
 ALTER SEQUENCE global_seq RESTART WITH 100000;
@@ -15,5 +17,18 @@ INSERT INTO user_roles (role, user_id) VALUES
   ('ROLE_ADMIN', 100001),
   ('ROLE_USER', 100001);
 
+-- id 100002
 INSERT INTO restaurants (description)
-VALUES ('First Restaurant');
+  VALUES ('First Restaurant');
+
+-- id 100003
+INSERT INTO restaurants (description)
+VALUES ('Second Restaurant');
+
+-- id 100004
+INSERT INTO lunchmenus (restaurant_id, description)
+VALUES (100002, 'Menu of First restaurant');
+
+-- id 100004
+INSERT INTO lunchmenus (restaurant_id, description)
+VALUES (100003, 'Menu of Second restaurant');

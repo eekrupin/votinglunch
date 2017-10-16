@@ -48,6 +48,6 @@ public class ReferenceEntity extends AbstractBaseEntity {
 
     @Override
     public String toString() {
-        return String.format("Entity %s (%s, %s)", getClass().getName(), getId(), getId(), getDescription());
+        return String.format("Entity %s (%s, %s)", getClass().getName(), getId(), getDescription());
     }
 }

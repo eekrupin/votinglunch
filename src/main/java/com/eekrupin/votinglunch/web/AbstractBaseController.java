@@ -16,6 +16,10 @@ public abstract class AbstractBaseController<T extends AbstractBaseEntity> {
 
     private BaseService<T> service;
 
+    public BaseService<T> getService() {
+        return service;
+    }
+
     protected AbstractBaseController(BaseService<T> service) {
          this.service = service;
     }

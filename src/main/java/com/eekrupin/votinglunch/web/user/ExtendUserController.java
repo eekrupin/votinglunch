@@ -2,18 +2,20 @@ package com.eekrupin.votinglunch.web.user;
 
 import com.eekrupin.votinglunch.model.User;
 import com.eekrupin.votinglunch.service.UserService;
-import com.eekrupin.votinglunch.web.AbstractBaseController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class AbstractUserController extends AbstractBaseController<User> {
+class ExtendUserController {
+
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     private UserService service;
 
-    public AbstractUserController(UserService service) {
-        super(service);
+    ExtendUserController(UserService service) {
         this.service = service;
     }
 
-    public User getByEmail(String email){
+    User getByEmail(String email){
         log.info("getByEmail {}", email);
         return service.getByEmail(email);
     }
