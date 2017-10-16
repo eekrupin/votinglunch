@@ -6,5 +6,5 @@ import com.eekrupin.votinglunch.model.LunchMenu;
 import java.util.List;
 
 public interface DishRepository extends AbstractReferenceRepository<Dish> {
-    List<Dish> getAll(LunchMenu lunchMenu);
+    List<Dish> getAllByRestaurant(Integer restaurant_id);
 }

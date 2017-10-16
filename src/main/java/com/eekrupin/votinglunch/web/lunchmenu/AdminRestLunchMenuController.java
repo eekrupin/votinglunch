@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(AdminRestLunchMenuController.REST_URL)
 public class AdminRestLunchMenuController extends AbstractBaseController<LunchMenu> {
-    public static final String REST_URL = "/rest/admin" + "/lunchmenu";
+    public static final String REST_URL = "/rest/admin/lunchmenu";
 
     private ExtendLunchMenuController extendController;
 
@@ -37,8 +37,8 @@ public class AdminRestLunchMenuController extends AbstractBaseController<LunchMe
     }
 
     @GetMapping(value = "/by", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<LunchMenu> getAllByRestaurant(@RequestParam("restaurant") Integer restaurant_id) {
-        return extendController.getAllByRestaurant(restaurant_id);
+    public List<LunchMenuTo> getAllByRestaurant(@RequestParam("restaurant_id") Integer restaurant_id) {
+        return extendController.getAllByRestaurant(restaurant_id).stream().map(el -> lunchMenuUtil.asTo(el)).collect(Collectors.toList());
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -66,8 +66,7 @@ public class AdminRestLunchMenuController extends AbstractBaseController<LunchMe
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<LunchMenuTo> getAllTo() {
-        List<LunchMenuTo> collect = super.getAll().stream().map(el -> lunchMenuUtil.asTo(el)).collect(Collectors.toList());
-        return collect;
+        return super.getAll().stream().map(el -> lunchMenuUtil.asTo(el)).collect(Collectors.toList());
     }
 
 

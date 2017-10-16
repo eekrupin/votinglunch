@@ -1,49 +1,42 @@
 package com.eekrupin.votinglunch.web;
 
 import com.eekrupin.votinglunch.TestUtil;
-import com.eekrupin.votinglunch.service.LunchMenuService;
-import com.eekrupin.votinglunch.to.LunchMenuTo;
-import com.eekrupin.votinglunch.util.LunchMenuUtil;
+import com.eekrupin.votinglunch.service.DishService;
+import com.eekrupin.votinglunch.to.DishTo;
+import com.eekrupin.votinglunch.util.DishUtil;
 import com.eekrupin.votinglunch.util.exception.ErrorType;
+import com.eekrupin.votinglunch.web.dish.AdminRestDishController;
 import com.eekrupin.votinglunch.web.json.JsonUtil;
-import com.eekrupin.votinglunch.web.lunchmenu.AdminRestLunchMenuController;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.eekrupin.votinglunch.ReferenceTestData.*;
 import static com.eekrupin.votinglunch.TestUtil.userHttpBasic;
 import static com.eekrupin.votinglunch.UserTestData.ADMIN;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
+public class AdminRestDishControllerTest extends AbstractControllerTest{
 
-
-public class AdminRestLunchMenuControllerTest extends AbstractControllerTest{
-
-    private static final String REST_URL = AdminRestLunchMenuController.REST_URL + '/';
-
-    @Autowired
-    private LunchMenuService baseService;
+    private static final String REST_URL = AdminRestDishController.REST_URL + '/';
 
     @Autowired
-    private LunchMenuUtil lunchMenuUtil;
+    private DishService baseService;
+
+    @Autowired
+    private DishUtil dishUtil;
 
     @Test
     public void testGet() throws Exception {
-        ResultActions actions = mockMvc.perform(get(REST_URL + LUNCH_MENU_ID1)
+        ResultActions actions = mockMvc.perform(get(REST_URL + DISH1_R1_ID)
                 .with(userHttpBasic(ADMIN)));
 
         actions .andExpect(status().isOk())
@@ -55,7 +48,7 @@ public class AdminRestLunchMenuControllerTest extends AbstractControllerTest{
 
     @Test
     public void testCreate() throws Exception {
-        LunchMenuTo created = new LunchMenuTo(null, RESTAURANT_ID,"New menu 1 restaurant");
+        DishTo created = new DishTo(null, RESTAURANT_ID,"New Dish 3 of First restaurant");
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
@@ -63,18 +56,18 @@ public class AdminRestLunchMenuControllerTest extends AbstractControllerTest{
                 )
                 .andExpect(status().isCreated());
 
-        LunchMenuTo returned = MATCHER_MENU.fromJsonAction(action);
+        DishTo returned = MATCHER_DISH.fromJsonAction(action);
         created.setId(returned.getId());
 
-        List<LunchMenuTo> all = baseService.getAll().stream().map(el -> lunchMenuUtil.asTo(el)).collect(Collectors.toList());
+        List<DishTo> all = baseService.getAll().stream().map(el -> dishUtil.asTo(el)).collect(Collectors.toList());
 
-        MATCHER_MENU.assertEquals(created, returned);
-        MATCHER_MENU.assertListEquals(Arrays.asList(LUNCH_MENU1, LUNCH_MENU2, created), all);
+        MATCHER_DISH.assertEquals(created, returned);
+        MATCHER_DISH.assertListEquals(Arrays.asList(DISH1_R1, DISH2_R1, DISH1_R2, created), all);
     }
 
     @Test
     public void testCreateInvalid() throws Exception {
-        LunchMenuTo expected = new LunchMenuTo(null, RESTAURANT_ID, "");
+        DishTo expected = new DishTo(null, RESTAURANT_ID, "");
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
@@ -87,13 +80,13 @@ public class AdminRestLunchMenuControllerTest extends AbstractControllerTest{
 
     @Test
     public void testMark() throws Exception {
-        mockMvc.perform(put(REST_URL + LUNCH_MENU_ID1 + "/mark")
+        mockMvc.perform(put(REST_URL + DISH1_R1_ID + "/mark")
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
         )
                 .andExpect(status().isOk());
 
-        mockMvc.perform(get(REST_URL + LUNCH_MENU_ID1)
+        mockMvc.perform(get(REST_URL + DISH1_R1_ID)
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
@@ -104,13 +97,13 @@ public class AdminRestLunchMenuControllerTest extends AbstractControllerTest{
     @Test
     public void testUnMark() throws Exception {
         testMark();
-        mockMvc.perform(put(REST_URL + LUNCH_MENU_ID1 + "/unmark")
+        mockMvc.perform(put(REST_URL + DISH1_R1_ID + "/unmark")
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
         )
                 .andExpect(status().isOk());
 
-        mockMvc.perform(get(REST_URL + LUNCH_MENU_ID1)
+        mockMvc.perform(get(REST_URL + DISH1_R1_ID)
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
@@ -120,13 +113,13 @@ public class AdminRestLunchMenuControllerTest extends AbstractControllerTest{
 
     @Test
     public void testDelete() throws Exception {
-        mockMvc.perform(delete(REST_URL + LUNCH_MENU_ID1)
+        mockMvc.perform(delete(REST_URL + DISH1_R1_ID)
                 .with(userHttpBasic(ADMIN)))
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        List<LunchMenuTo> all = baseService.getAll().stream().map(el -> lunchMenuUtil.asTo(el)).collect(Collectors.toList());
-        MATCHER_MENU.assertListEquals(Collections.singletonList(LUNCH_MENU2), all);
+        List<DishTo> all = baseService.getAll().stream().map(el -> dishUtil.asTo(el)).collect(Collectors.toList());
+        MATCHER_DISH.assertListEquals(Arrays.asList(DISH2_R1, DISH1_R2), all);
     }
 
     @Test
@@ -135,7 +128,7 @@ public class AdminRestLunchMenuControllerTest extends AbstractControllerTest{
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER_MENU.contentListMatcher(LUNCH_MENU1, LUNCH_MENU2)));
+                .andExpect(MATCHER_DISH.contentListMatcher(DISH1_R1, DISH2_R1, DISH1_R2)));
     }
 
     @Test
@@ -144,6 +137,6 @@ public class AdminRestLunchMenuControllerTest extends AbstractControllerTest{
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER_MENU.contentListMatcher(LUNCH_MENU1)));
+                .andExpect(MATCHER_DISH.contentListMatcher(DISH1_R1, DISH2_R1)));
     }
 }

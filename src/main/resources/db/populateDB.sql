@@ -1,3 +1,4 @@
+DELETE FROM dishes;
 DELETE FROM lunchmenus;
 DELETE FROM restaurants;
 DELETE FROM user_roles;
@@ -32,3 +33,15 @@ VALUES (100002, 'Menu of First restaurant');
 -- id 100004
 INSERT INTO lunchmenus (restaurant_id, description)
 VALUES (100003, 'Menu of Second restaurant');
+
+-- id 100005
+INSERT INTO dishes (restaurant_id, description)
+VALUES (100002, 'Dish 1 of First restaurant');
+
+-- id 100006
+INSERT INTO dishes (restaurant_id, description)
+VALUES (100002, 'Dish 2 of First restaurant');
+
+-- id 100007
+INSERT INTO dishes (restaurant_id, description)
+VALUES (100003, 'Dish 1 of Second restaurant');
