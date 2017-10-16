@@ -1,21 +1,18 @@
 package com.eekrupin.votinglunch.web;
 
-import com.eekrupin.votinglunch.model.LunchMenu;
-import com.eekrupin.votinglunch.model.ReferenceEntity;
-import com.eekrupin.votinglunch.model.Restaurant;
 import com.eekrupin.votinglunch.service.LunchMenuService;
 import com.eekrupin.votinglunch.to.LunchMenuTo;
 import com.eekrupin.votinglunch.util.LunchMenuUtil;
 import com.eekrupin.votinglunch.util.exception.ErrorType;
 import com.eekrupin.votinglunch.web.json.JsonUtil;
 import com.eekrupin.votinglunch.web.lunchmenu.AdminRestLunchMenuController;
-import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +25,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+
+
 
 
 public class AdminRestLunchMenuControllerTest extends AbstractControllerTest{
@@ -83,4 +83,49 @@ public class AdminRestLunchMenuControllerTest extends AbstractControllerTest{
                 .andExpect(errorType(ErrorType.VALIDATION_ERROR))
                 .andDo(print());
     }
+
+    @Test
+    public void testMark() throws Exception {
+        mockMvc.perform(put(REST_URL + LUNCH_MENU_ID1 + "/mark")
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(ADMIN))
+        )
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get(REST_URL + LUNCH_MENU_ID1)
+                .with(userHttpBasic(ADMIN)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.deletionMark").value("true"));
+    }
+
+    @Test
+    public void testUnMark() throws Exception {
+        testMark();
+        mockMvc.perform(put(REST_URL + LUNCH_MENU_ID1 + "/unmark")
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(ADMIN))
+        )
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get(REST_URL + LUNCH_MENU_ID1)
+                .with(userHttpBasic(ADMIN)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.deletionMark").value("false"));
+    }
+
+    @Test
+    public void testDelete() throws Exception {
+        mockMvc.perform(delete(REST_URL + LUNCH_MENU_ID1)
+                .with(userHttpBasic(ADMIN)))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        List<LunchMenuTo> all = baseService.getAll().stream().map(el -> lunchMenuUtil.asTo(el)).collect(Collectors.toList());
+        MATCHER_MENU.assertListEquals(Collections.singletonList(LUNCH_MENU2), all);
+    }
+
 }
