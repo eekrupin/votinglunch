@@ -12,6 +12,9 @@ public class DishUtil {
     @Autowired
     private CrudRestaurantRepository restaurantRepository;
 
+    public DishUtil() {
+    }
+
     public Dish createNewFromTo(DishTo newEl) {
         return new Dish(null, restaurantRepository.getOne(newEl.getRestaurant_id()), newEl.getDescription());
     }

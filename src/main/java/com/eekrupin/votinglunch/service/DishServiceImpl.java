@@ -1,9 +1,7 @@
 package com.eekrupin.votinglunch.service;
 
 import com.eekrupin.votinglunch.model.Dish;
-import com.eekrupin.votinglunch.model.LunchMenu;
 import com.eekrupin.votinglunch.repository.interfaces.DishRepository;
-import com.eekrupin.votinglunch.repository.interfaces.LunchMenuRepository;
 import com.eekrupin.votinglunch.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

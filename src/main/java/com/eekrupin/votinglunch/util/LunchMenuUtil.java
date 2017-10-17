@@ -12,6 +12,9 @@ public class LunchMenuUtil {
     @Autowired
     private CrudRestaurantRepository restaurantRepository;
 
+    public LunchMenuUtil() {
+    }
+
     public LunchMenu createNewFromTo(LunchMenuTo newEl) {
         return new LunchMenu(null, restaurantRepository.getOne(newEl.getRestaurant_id()), newEl.getDescription());
     }

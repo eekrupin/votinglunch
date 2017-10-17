@@ -49,7 +49,7 @@ public class DishTo extends BaseTo implements Serializable {
 
     @Override
     public String toString() {
-        return "Dish{" +
+        return "DishTo{" +
                 "id=" + getId() +
                 ", description='" + description + '\'' +
                 ", restaurant_id='" + restaurant_id + '\'' +

@@ -66,6 +66,7 @@ CREATE TABLE menuconsist
   restaurant_id INTEGER NOT NULL ,
   menu_id INTEGER NOT NULL ,
   dish_id INTEGER NOT NULL ,
+  deletionMark BOOLEAN DEFAULT FALSE ,
   FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE ,
   FOREIGN KEY (menu_id) REFERENCES lunchmenus (id) ON DELETE CASCADE ,
   FOREIGN KEY (dish_id) REFERENCES dishes (id) ON DELETE CASCADE
@@ -79,6 +80,7 @@ CREATE TABLE voting
   date DATE NOT NULL ,
   restaurant_id INTEGER NOT NULL ,
   user_id INTEGER NOT NULL ,
+  deletionMark BOOLEAN DEFAULT FALSE ,
   FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE ,
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );

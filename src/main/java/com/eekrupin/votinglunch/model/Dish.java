@@ -21,6 +21,8 @@ public class Dish extends ReferenceEntity {
     @NotNull
     private Restaurant restaurant;
 
+    //TODO Make price
+
     public Dish() {
     }
 

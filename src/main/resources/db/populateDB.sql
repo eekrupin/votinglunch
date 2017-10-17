@@ -30,18 +30,34 @@ VALUES ('Second Restaurant');
 INSERT INTO lunchmenus (restaurant_id, description)
 VALUES (100002, 'Menu of First restaurant');
 
--- id 100004
+-- id 100005
 INSERT INTO lunchmenus (restaurant_id, description)
 VALUES (100003, 'Menu of Second restaurant');
 
--- id 100005
+-- id 100006
 INSERT INTO dishes (restaurant_id, description)
 VALUES (100002, 'Dish 1 of First restaurant');
 
--- id 100006
+-- id 100007
 INSERT INTO dishes (restaurant_id, description)
 VALUES (100002, 'Dish 2 of First restaurant');
 
--- id 100007
+-- id 100008
 INSERT INTO dishes (restaurant_id, description)
 VALUES (100003, 'Dish 1 of Second restaurant');
+
+-- id 100008
+INSERT INTO menuconsist (date, restaurant_id, menu_id, dish_id)
+VALUES ('2017-10-16', 100002, 100004, 100006);
+
+-- id 100009
+INSERT INTO menuconsist (date, restaurant_id, menu_id, dish_id)
+VALUES ('2017-10-16', 100002, 100004, 100007);
+
+-- id 100010
+INSERT INTO menuconsist (date, restaurant_id, menu_id, dish_id)
+VALUES ('2017-10-16', 100003, 100005, 100008);
+
+-- id 100011
+INSERT INTO menuconsist (date, restaurant_id, menu_id, dish_id)
+VALUES ('2017-10-17', 100002, 100004, 100006);

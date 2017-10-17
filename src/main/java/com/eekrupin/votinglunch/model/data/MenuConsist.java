@@ -15,6 +15,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "menuconsist")
+@Access(AccessType.FIELD)
 public class MenuConsist extends AbstractBaseEntity {
 
     @Column(name = "date", nullable = false)
@@ -41,8 +42,9 @@ public class MenuConsist extends AbstractBaseEntity {
     public MenuConsist() {
     }
 
-    public MenuConsist(Integer id, Restaurant restaurant, LunchMenu lunchMenu, Dish dish) {
+    public MenuConsist(Integer id, LocalDate date, Restaurant restaurant, LunchMenu lunchMenu, Dish dish) {
         super(id);
+        this.date = date;
         this.restaurant = restaurant;
         this.lunchMenu = lunchMenu;
         this.dish = dish;
