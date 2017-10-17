@@ -67,7 +67,7 @@ public class AdminRestUserControllerTest extends AbstractControllerTest{
         newUser.setId(returned.getId());
 
         MATCHER.assertEquals(newUser, returned);
-        MATCHER.assertListEquals(Arrays.asList(USER, ADMIN, newUser), userService.getAll());
+        MATCHER.assertListEquals(Arrays.asList(USER, ADMIN, USER2, newUser), userService.getAll());
     }
 
     @Test
@@ -149,7 +149,7 @@ public class AdminRestUserControllerTest extends AbstractControllerTest{
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentListMatcher(USER, ADMIN)));
+                .andExpect(MATCHER.contentListMatcher(USER, ADMIN, USER2)));
     }
 
     @Test
@@ -199,7 +199,7 @@ public class AdminRestUserControllerTest extends AbstractControllerTest{
                 .with(userHttpBasic(ADMIN)))
                 .andDo(print())
                 .andExpect(status().isOk());
-        MATCHER.assertListEquals(Collections.singletonList(ADMIN), userService.getAll());
+        MATCHER.assertListEquals(Arrays.asList(ADMIN, USER2), userService.getAll());
     }
 
     @Test

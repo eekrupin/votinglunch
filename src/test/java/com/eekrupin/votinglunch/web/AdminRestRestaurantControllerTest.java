@@ -18,6 +18,7 @@ import static com.eekrupin.votinglunch.ReferenceTestData.RESTAURANT_ID;
 import static com.eekrupin.votinglunch.TestUtil.userHttpBasic;
 import static com.eekrupin.votinglunch.ReferenceTestData.*;
 import static com.eekrupin.votinglunch.UserTestData.ADMIN;
+import static com.eekrupin.votinglunch.UserTestData.USER;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -85,6 +86,29 @@ public class AdminRestRestaurantControllerTest extends AbstractControllerTest{
                 .andExpect(status().isOk());
 
         MATCHER.assertEquals(updated, baseService.get(RESTAURANT_ID));
+    }
+
+    @Test
+    public void testCreateForbidden() throws Exception {
+        Restaurant created = new Restaurant(null, "New restaurant");
+        ResultActions action = mockMvc.perform(post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(USER))
+                .content(JsonUtil.writeValue(created))
+        )
+                .andExpect(status().isForbidden());
+
+    }
+
+    @Test
+    public void testGetByUser() throws Exception {
+        mockMvc.perform(get(REST_URL + RESTAURANT_ID)
+                .with(userHttpBasic(USER)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                // https://jira.spring.io/browse/SPR-14472
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(MATCHER.contentMatcher(RESTAURANT));
     }
 
 }

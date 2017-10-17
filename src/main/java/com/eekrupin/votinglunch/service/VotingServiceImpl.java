@@ -1,10 +1,12 @@
 package com.eekrupin.votinglunch.service;
 
+import com.eekrupin.votinglunch.AuthorizedUser;
 import com.eekrupin.votinglunch.model.User;
 import com.eekrupin.votinglunch.model.data.Voting;
 import com.eekrupin.votinglunch.repository.interfaces.VotingRepository;
 import com.eekrupin.votinglunch.util.DateUtil;
 import com.eekrupin.votinglunch.util.UserUtil;
+import com.eekrupin.votinglunch.util.exception.ForbiddenException;
 import com.eekrupin.votinglunch.util.exception.TimeExpiredException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,6 +58,10 @@ public class VotingServiceImpl implements VotingService{
 
     @Override
     public Voting get(LocalDate date, User user) {
+        //TODO change this
+        if ( !user.getId().equals(AuthorizedUser.id()) ){
+            throw new ForbiddenException();
+        }
         return checkNotFound(repository.get(date, user), String.format("date: %s, user: %s", DateUtil.toString(date), user.getId()));
     }
 

@@ -22,9 +22,7 @@ import java.time.Month;
 
 import static com.eekrupin.votinglunch.ReferenceTestData.*;
 import static com.eekrupin.votinglunch.TestUtil.userHttpBasic;
-import static com.eekrupin.votinglunch.UserTestData.ADMIN;
-import static com.eekrupin.votinglunch.UserTestData.USER;
-import static com.eekrupin.votinglunch.UserTestData.USER_ID;
+import static com.eekrupin.votinglunch.UserTestData.*;
 import static java.time.LocalDate.of;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -158,6 +156,16 @@ public class AdminRestVotingControllerTest extends AbstractControllerTest{
                 .andExpect(errorType(ErrorType.TIME_EXPIRED))
                 .andExpect(jsonMessage("$.details", "exception.common.timeExpired"));
 
+    }
+
+    @Test
+    public void testGetForbidden() throws Exception {
+        ResultActions action = mockMvc.perform(get(REST_URL)
+                .param("date", "2017-10-16")
+                .param("user_id", String.valueOf(USER_ID))
+                .with(userHttpBasic(USER2)))
+                .andDo(print())
+                .andExpect(status().isForbidden());
     }
 
 }
