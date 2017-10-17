@@ -79,11 +79,10 @@ CREATE TABLE voting
 (
   id INTEGER PRIMARY KEY DEFAULT nextval('global_seq') ,
   date DATE NOT NULL ,
-  restaurant_id INTEGER NOT NULL ,
   user_id INTEGER NOT NULL ,
+  restaurant_id INTEGER NOT NULL ,
   deletionMark BOOLEAN DEFAULT FALSE ,
   FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE ,
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
-CREATE UNIQUE INDEX voting_unique_idx ON voting (date, restaurant_id, user_id);
-CLUSTER voting USING voting_unique_idx;
+CREATE UNIQUE INDEX voting_unique_idx ON voting (date, user_id);

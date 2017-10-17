@@ -4,6 +4,11 @@ import com.eekrupin.votinglunch.model.Role;
 import com.eekrupin.votinglunch.model.User;
 import com.eekrupin.votinglunch.to.UserTo;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.time.LocalTime;
+import java.util.Properties;
+
 public class UserUtil {
 
     public static User createNewFromTo(UserTo newUser) {
@@ -26,4 +31,18 @@ public class UserUtil {
         user.setEmail(user.getEmail().toLowerCase());
         return user;
     }
+
+    public static LocalTime getExpirationTimeVoting() {
+        Properties props = new Properties();
+        try {
+            props.load(UserUtil.class.getClassLoader().getResourceAsStream("config/application.properties"));
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+        String expirationTimeVoting = props.getProperty("ExpirationTimeVoting");
+        LocalTime time = LocalTime.parse(expirationTimeVoting);
+        return time;
+    }
+
 }
+

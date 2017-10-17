@@ -1,3 +1,5 @@
+DELETE FROM voting;
+DELETE FROM menuconsist;
 DELETE FROM dishes;
 DELETE FROM lunchmenus;
 DELETE FROM restaurants;
@@ -5,11 +7,11 @@ DELETE FROM user_roles;
 DELETE FROM users;
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
--- admin
+-- admin -- id 100000
 INSERT INTO users (description, email, password)
 VALUES ('User', 'user@yandex.ru', '$2a$10$Sh0ZD2NFrzRRJJEKEWn8l.92ROEuzlVyzB9SV1AM8fdluPR0aC1ni');
 
--- password
+-- users -- id 100001
 INSERT INTO users (description, email, password)
 VALUES ('Admin', 'admin@gmail.com', '$2a$10$WejOLxVuXRpOgr4IlzQJ.eT4UcukNqHlAiOVZj1P/nmc8WbpMkiju');
 
@@ -61,3 +63,15 @@ VALUES ('2017-10-16', 100003, 100005, 100008);
 -- id 100011
 INSERT INTO menuconsist (date, restaurant_id, menu_id, dish_id)
 VALUES ('2017-10-17', 100002, 100004, 100006);
+
+-- id 100012
+INSERT INTO voting (date, user_id, restaurant_id)
+VALUES ('2017-10-16', 100000, 100002);
+
+-- id 100013
+INSERT INTO voting (date, user_id, restaurant_id)
+VALUES ('2017-10-17', 100000, 100003);
+
+-- id 100014
+INSERT INTO voting (date, user_id, restaurant_id)
+VALUES ('2017-10-16', 100001, 100002);

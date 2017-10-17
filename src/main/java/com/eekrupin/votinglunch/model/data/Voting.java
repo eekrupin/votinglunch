@@ -33,19 +33,20 @@ public class Voting extends AbstractBaseEntity {
     public Voting() {
     }
 
-    public Voting(Integer id, Restaurant restaurant, User user) {
+    public Voting(Integer id, LocalDate date, User user, Restaurant restaurant) {
         super(id);
-        this.restaurant = restaurant;
+        this.date = date;
         this.user = user;
+        this.restaurant = restaurant;
     }
 
     @Override
     public String toString() {
         return "Voting{" +
                 "id='" + getId() + '\'' +
-                "date='" + DateUtil.toString(getDate()) + '\'' +
-                "restaurant='" + (getRestaurant().isNew() ? "(new)" : getRestaurant().getDescription()) + '\'' +
-                "user='" + (getUser().isNew() ? "(new)" : getUser().getDescription()) + '\'' +
+                ", date='" + DateUtil.toString(getDate()) + '\'' +
+                ", restaurant='" + (getRestaurant().isNew() ? "(new)" : getRestaurant().getDescription()) + '\'' +
+                ", user='" + (getUser().isNew() ? "(new)" : getUser().getDescription()) + '\'' +
                 '}';
     }
 

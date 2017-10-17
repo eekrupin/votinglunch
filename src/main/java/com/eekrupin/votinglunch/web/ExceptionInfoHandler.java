@@ -32,11 +32,13 @@ public class ExceptionInfoHandler {
     private static Logger log = LoggerFactory.getLogger(ExceptionInfoHandler.class);
 
     public static final String EXCEPTION_DUPLICATE_EMAIL = "exception.user.duplicateEmail";
+    public static final String EXCEPTION_DUPLICATE_ROW = "exception.user.duplicateRow";
 
     private static final Map<String, String> CONSTRAINS_I18N_MAP = Collections.unmodifiableMap(
             new HashMap<String, String>() {
                 {
                     put("users_unique_email_idx", EXCEPTION_DUPLICATE_EMAIL);
+                    put("voting_unique_idx", EXCEPTION_DUPLICATE_ROW);
                 }
             });
 

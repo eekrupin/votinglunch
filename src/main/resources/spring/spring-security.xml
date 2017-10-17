@@ -20,7 +20,7 @@
         <!--<intercept-url pattern="/login" access="isAnonymous()"/>-->
         <!--<intercept-url pattern="/register" access="isAnonymous()"/>-->
 
-        <intercept-url pattern="/**/admin/**" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/**/admin/**" access="hasRole('ROLE_ADMIN')" method="POST"/>
         <intercept-url pattern="/**" access="isAuthenticated()"/>
 
         <form-login/>

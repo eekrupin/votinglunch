@@ -1,11 +1,10 @@
-package com.eekrupin.votinglunch.repository.interfaces;
+package com.eekrupin.votinglunch.service;
 
 import com.eekrupin.votinglunch.model.User;
 import com.eekrupin.votinglunch.model.data.Voting;
-
 import java.time.LocalDate;
 
-public interface VotingRepository {
+public interface VotingService {
 
     Voting save(Voting voting);
 

@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class MenuConsistTo extends BaseTo implements Serializable {
+public class VotingTo extends BaseTo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotNull
@@ -17,20 +17,16 @@ public class MenuConsistTo extends BaseTo implements Serializable {
     private Integer restaurant_id;
 
     @NotNull
-    private Integer lunchMenu_id;
+    private Integer user_id;
 
-    @NotNull
-    private Integer dish_id;
-
-    public MenuConsistTo() {
+    public VotingTo() {
     }
 
-    public MenuConsistTo(Integer id, LocalDate date, Integer restaurant_id, Integer lunchMenu_id, Integer dish_id) {
+    public VotingTo(Integer id, LocalDate date, Integer user_id, Integer restaurant_id) {
         super(id);
         this.date = date;
+        this.user_id = user_id;
         this.restaurant_id = restaurant_id;
-        this.lunchMenu_id = lunchMenu_id;
-        this.dish_id = dish_id;
     }
 
     public Integer getRestaurant_id() {
@@ -41,20 +37,12 @@ public class MenuConsistTo extends BaseTo implements Serializable {
         this.restaurant_id = restaurant_id;
     }
 
-    public Integer getLunchMenu_id() {
-        return lunchMenu_id;
+    public Integer getUser_id() {
+        return user_id;
     }
 
-    public void setLunchMenu_id(Integer lunchMenu_id) {
-        this.lunchMenu_id = lunchMenu_id;
-    }
-
-    public Integer getDish_id() {
-        return dish_id;
-    }
-
-    public void setDish_id(Integer dish_id) {
-        this.dish_id = dish_id;
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 
     public LocalDate getDate() {
@@ -70,9 +58,8 @@ public class MenuConsistTo extends BaseTo implements Serializable {
         return "MenuConsistTo{" +
                 "id=" + getId() +
                 ", date='" + DateUtil.toString(getDate()) + '\'' +
+                ", user_id_id='" + user_id + '\'' +
                 ", restaurant_id='" + restaurant_id + '\'' +
-                ", lunchMenu_id='" + lunchMenu_id + '\'' +
-                ", dish_id='" + dish_id + '\'' +
                 '}';
     }
 }

@@ -5,10 +5,13 @@ import com.eekrupin.votinglunch.model.*;
 import com.eekrupin.votinglunch.to.DishTo;
 import com.eekrupin.votinglunch.to.LunchMenuTo;
 import com.eekrupin.votinglunch.to.MenuConsistTo;
+import com.eekrupin.votinglunch.to.VotingTo;
 
 import java.time.Month;
 import java.util.Objects;
 
+import static com.eekrupin.votinglunch.UserTestData.ADMIN_ID;
+import static com.eekrupin.votinglunch.UserTestData.USER_ID;
 import static com.eekrupin.votinglunch.model.AbstractBaseEntity.START_SEQ;
 import static java.time.LocalDate.of;
 
@@ -30,6 +33,9 @@ public class ReferenceTestData {
     public static final int MENUCONSIST_D1_R2_ID3 = START_SEQ + count++;
     public static final int MENUCONSIST_D2_R1_ID4 = START_SEQ + count++;
 
+    public static final int VOTING_U1_D1_ID1 = START_SEQ + count++;
+    public static final int VOTING_U1_D2_ID2 = START_SEQ + count++;
+    public static final int VOTING_U2_D1_ID3 = START_SEQ + count++;
 
     public static final Restaurant RESTAURANT = new Restaurant(RESTAURANT_ID, "First Restaurant");
     public static final Restaurant RESTAURANT2 = new Restaurant(RESTAURANT_ID2, "Second Restaurant");
@@ -41,11 +47,14 @@ public class ReferenceTestData {
     public static final DishTo DISH2_R1 = new DishTo(DISH2_R1_ID, RESTAURANT_ID, "Dish 2 of First restaurant", 200);
     public static final DishTo DISH1_R2 = new DishTo(DISH1_R2_ID, RESTAURANT_ID2, "Dish 2 of First restaurant", 300);
 
-
     public static final MenuConsistTo MENUCONSIST_D1_R1_1 = new MenuConsistTo(MENUCONSIST_D1_R1_ID1, of(2017, Month.OCTOBER, 16), RESTAURANT_ID, LUNCH_MENU_ID1, DISH1_R1_ID);
     public static final MenuConsistTo MENUCONSIST_D1_R1_2 = new MenuConsistTo(MENUCONSIST_D1_R1_ID2, of(2017, Month.OCTOBER, 16), RESTAURANT_ID, LUNCH_MENU_ID1, DISH2_R1_ID);
     public static final MenuConsistTo MENUCONSIST_D1_R2_3 = new MenuConsistTo(MENUCONSIST_D1_R2_ID3, of(2017, Month.OCTOBER, 16), RESTAURANT_ID2, LUNCH_MENU_ID2, DISH1_R2_ID);
     public static final MenuConsistTo MENUCONSIST_D2_R1_4 = new MenuConsistTo(MENUCONSIST_D2_R1_ID4, of(2017, Month.OCTOBER, 17), RESTAURANT_ID, LUNCH_MENU_ID1, DISH1_R1_ID);
+
+    public static final VotingTo VOTING_U1_D1 = new VotingTo(VOTING_U1_D1_ID1, of(2017, Month.OCTOBER, 16),USER_ID, RESTAURANT_ID);
+    public static final VotingTo VOTING_U1_D2 = new VotingTo(VOTING_U1_D2_ID2, of(2017, Month.OCTOBER, 17),USER_ID, RESTAURANT_ID2);
+    public static final VotingTo VOTING_U2_D1 = new VotingTo(VOTING_U2_D1_ID3, of(2017, Month.OCTOBER, 16),ADMIN_ID, RESTAURANT_ID);
 
     public static final BeanMatcher<ReferenceEntity> MATCHER = BeanMatcher.of(ReferenceEntity.class,
             (expected, actual) -> expected == actual ||
@@ -77,6 +86,14 @@ public class ReferenceTestData {
                             && Objects.equals(expected.getRestaurant_id(), actual.getRestaurant_id())
                             && Objects.equals(expected.getLunchMenu_id(), actual.getLunchMenu_id())
                             && Objects.equals(expected.getDish_id(), actual.getDish_id())
+                    )
+    );
+
+    public static final BeanMatcher<VotingTo> MATCHER_VOTING = BeanMatcher.of(VotingTo.class,
+            (expected, actual) -> expected == actual ||
+                    (Objects.equals(expected.getDate(), actual.getDate())
+                            && Objects.equals(expected.getUser_id(), actual.getUser_id())
+                            && Objects.equals(expected.getRestaurant_id(), actual.getRestaurant_id())
                     )
     );
 
