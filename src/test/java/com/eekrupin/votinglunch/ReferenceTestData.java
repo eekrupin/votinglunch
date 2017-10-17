@@ -37,9 +37,9 @@ public class ReferenceTestData {
     public static final LunchMenuTo LUNCH_MENU1 = new LunchMenuTo(LUNCH_MENU_ID1, RESTAURANT_ID, "Menu of First restaurant", false);
     public static final LunchMenuTo LUNCH_MENU2 = new LunchMenuTo(LUNCH_MENU_ID2, RESTAURANT_ID2, "Menu of Second restaurant", false);
 
-    public static final DishTo DISH1_R1 = new DishTo(DISH1_R1_ID, RESTAURANT_ID, "Dish 1 of First restaurant", false);
-    public static final DishTo DISH2_R1 = new DishTo(DISH2_R1_ID, RESTAURANT_ID, "Dish 2 of First restaurant", false);
-    public static final DishTo DISH1_R2 = new DishTo(DISH1_R2_ID, RESTAURANT_ID2, "Dish 2 of First restaurant", false);
+    public static final DishTo DISH1_R1 = new DishTo(DISH1_R1_ID, RESTAURANT_ID, "Dish 1 of First restaurant", 100);
+    public static final DishTo DISH2_R1 = new DishTo(DISH2_R1_ID, RESTAURANT_ID, "Dish 2 of First restaurant", 200);
+    public static final DishTo DISH1_R2 = new DishTo(DISH1_R2_ID, RESTAURANT_ID2, "Dish 2 of First restaurant", 300);
 
 
     public static final MenuConsistTo MENUCONSIST_D1_R1_1 = new MenuConsistTo(MENUCONSIST_D1_R1_ID1, of(2017, Month.OCTOBER, 16), RESTAURANT_ID, LUNCH_MENU_ID1, DISH1_R1_ID);

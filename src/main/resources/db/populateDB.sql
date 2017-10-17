@@ -35,16 +35,16 @@ INSERT INTO lunchmenus (restaurant_id, description)
 VALUES (100003, 'Menu of Second restaurant');
 
 -- id 100006
-INSERT INTO dishes (restaurant_id, description)
-VALUES (100002, 'Dish 1 of First restaurant');
+INSERT INTO dishes (restaurant_id, description, price)
+VALUES (100002, 'Dish 1 of First restaurant', 100);
 
 -- id 100007
-INSERT INTO dishes (restaurant_id, description)
-VALUES (100002, 'Dish 2 of First restaurant');
+INSERT INTO dishes (restaurant_id, description, price)
+VALUES (100002, 'Dish 2 of First restaurant', 200);
 
 -- id 100008
-INSERT INTO dishes (restaurant_id, description)
-VALUES (100003, 'Dish 1 of Second restaurant');
+INSERT INTO dishes (restaurant_id, description, price)
+VALUES (100003, 'Dish 1 of Second restaurant', 300);
 
 -- id 100008
 INSERT INTO menuconsist (date, restaurant_id, menu_id, dish_id)

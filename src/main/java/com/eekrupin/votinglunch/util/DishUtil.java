@@ -16,22 +16,23 @@ public class DishUtil {
     }
 
     public Dish createNewFromTo(DishTo newEl) {
-        return new Dish(null, restaurantRepository.getOne(newEl.getRestaurant_id()), newEl.getDescription());
+        return new Dish(null, restaurantRepository.getOne(newEl.getRestaurant_id()), newEl.getDescription(), newEl.getPrice());
     }
 
     public DishTo asTo(Dish el) {
-        return new DishTo(el.getId(), el.getRestaurant().getId(), el.getDescription(), el.isDeletionMark());
+        return new DishTo(el.getId(), el.getRestaurant().getId(), el.getDescription(), el.getPrice(), el.isDeletionMark());
     }
 
     public Dish updateFromTo(Dish el, DishTo elTo) {
         el.setDescription(elTo.getDescription());
         el.setRestaurant(restaurantRepository.getOne(elTo.getRestaurant_id()));
         el.setDeletionMark(elTo.isDeletionMark());
+        el.setPrice(elTo.getPrice());
         return el;
     }
 
     public Dish asDish(DishTo el) {
-        Dish dish = new Dish(el.getId(), restaurantRepository.getOne(el.getRestaurant_id()), el.getDescription());
+        Dish dish = new Dish(el.getId(), restaurantRepository.getOne(el.getRestaurant_id()), el.getDescription(), el.getPrice());
         dish.setDeletionMark(el.isDeletionMark());
         return dish;
     }

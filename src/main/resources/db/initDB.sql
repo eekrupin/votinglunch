@@ -55,6 +55,7 @@ CREATE TABLE dishes
   restaurant_id INTEGER NOT NULL ,
   description VARCHAR NOT NULL ,
   deletionMark BOOLEAN DEFAULT FALSE ,
+  price INTEGER NOT NULL DEFAULT 0 ,
   CONSTRAINT dishes_description_idx UNIQUE (restaurant_id, description) ,
   FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
 );

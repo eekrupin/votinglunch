@@ -48,7 +48,7 @@ public class AdminRestDishControllerTest extends AbstractControllerTest{
 
     @Test
     public void testCreate() throws Exception {
-        DishTo created = new DishTo(null, RESTAURANT_ID,"New Dish 3 of First restaurant");
+        DishTo created = new DishTo(null, RESTAURANT_ID,"New Dish 3 of First restaurant", 500);
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
@@ -67,7 +67,7 @@ public class AdminRestDishControllerTest extends AbstractControllerTest{
 
     @Test
     public void testCreateInvalid() throws Exception {
-        DishTo expected = new DishTo(null, RESTAURANT_ID, "");
+        DishTo expected = new DishTo(null, RESTAURANT_ID, "", null);
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))

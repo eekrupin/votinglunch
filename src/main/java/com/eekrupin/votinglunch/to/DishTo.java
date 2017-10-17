@@ -17,17 +17,21 @@ public class DishTo extends BaseTo implements Serializable {
     @NotNull
     private Integer restaurant_id;
 
+    @NotNull
+    private Integer price;
+
     public DishTo() {
     }
 
-    public DishTo(Integer id, Integer restaurant_id, String description) {
-        this(id, restaurant_id, description, false);
+    public DishTo(Integer id, Integer restaurant_id, String description, Integer price) {
+        this(id, restaurant_id, description, price, false);
     }
 
-    public DishTo(Integer id, Integer restaurant_id, String description, boolean deletionMark) {
+    public DishTo(Integer id, Integer restaurant_id, String description, Integer price, boolean deletionMark) {
         super(id);
         this.description = description;
         this.restaurant_id = restaurant_id;
+        this.price = price;
         this.setDeletionMark(deletionMark);
     }
 
@@ -45,6 +49,14 @@ public class DishTo extends BaseTo implements Serializable {
 
     public void setRestaurant_id(Integer restaurant_id) {
         this.restaurant_id = restaurant_id;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
     @Override

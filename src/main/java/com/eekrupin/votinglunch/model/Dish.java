@@ -21,14 +21,16 @@ public class Dish extends ReferenceEntity {
     @NotNull
     private Restaurant restaurant;
 
-    //TODO Make price
+    private Integer price;
 
+    @NotNull
     public Dish() {
     }
 
-    public Dish(Integer id, Restaurant restaurant, String description) {
+    public Dish(Integer id, Restaurant restaurant, String description, Integer price) {
         super(id, description);
         this.restaurant = restaurant;
+        this.price = price;
     }
 
     public Restaurant getRestaurant() {
@@ -39,12 +41,21 @@ public class Dish extends ReferenceEntity {
         this.restaurant = restaurant;
     }
 
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "Dish{" +
                 "id='" + getId() + '\'' +
-                "restaurant='" + (restaurant.isNew() ? "(new)" : restaurant.description) + '\'' +
-                "description='" + description + '\'' +
+                ", restaurant='" + (restaurant.isNew() ? "(new)" : restaurant.getDescription()) + '\'' +
+                ", description='" + getDescription() + '\'' +
+                ", price='" + getPrice() + '\'' +
                 '}';
     }
 }
