@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,7 +21,6 @@ import static com.eekrupin.votinglunch.UserTestData.USER;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 
 public class AdminRestRestaurantControllerTest extends AbstractControllerTest{
 
@@ -37,7 +35,6 @@ public class AdminRestRestaurantControllerTest extends AbstractControllerTest{
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
-                // https://jira.spring.io/browse/SPR-14472
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MATCHER.contentMatcher(RESTAURANT));
     }
@@ -106,7 +103,6 @@ public class AdminRestRestaurantControllerTest extends AbstractControllerTest{
                 .with(userHttpBasic(USER)))
                 .andExpect(status().isOk())
                 .andDo(print())
-                // https://jira.spring.io/browse/SPR-14472
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MATCHER.contentMatcher(RESTAURANT));
     }

@@ -26,7 +26,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 public class AdminRestUserControllerTest extends AbstractControllerTest{
 
     private static final String REST_URL = AdminRestUserController.REST_URL + '/';
@@ -34,21 +33,12 @@ public class AdminRestUserControllerTest extends AbstractControllerTest{
     @Autowired
     protected UserService userService;
 
-//    @Before
-//    public void setUp() throws Exception {
-//    }
-//
-//    @After
-//    public void tearDown() throws Exception {
-//    }
-
     @Test
     public void testGet() throws Exception {
         mockMvc.perform(get(REST_URL + ADMIN_ID)
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
-                // https://jira.spring.io/browse/SPR-14472
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MATCHER.contentMatcher(ADMIN));
     }
@@ -61,6 +51,7 @@ public class AdminRestUserControllerTest extends AbstractControllerTest{
                 .with(userHttpBasic(ADMIN))
                 .content(jsonWithPassword(newUser, "newPass"))
                 )
+                .andDo(print())
                 .andExpect(status().isCreated());
 
         User returned = MATCHER.fromJsonAction(action);
@@ -149,7 +140,8 @@ public class AdminRestUserControllerTest extends AbstractControllerTest{
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentListMatcher(USER, ADMIN, USER2)));
+                .andExpect(MATCHER.contentListMatcher(USER, ADMIN, USER2)))
+        .andDo(print());
     }
 
     @Test

@@ -18,6 +18,16 @@ public class AuthorizedUser extends org.springframework.security.core.userdetail
         this.userTo = UserUtil.asTo(user);
     }
 
+    public static Integer safeGetIdOrDefaultId(){
+        AuthorizedUser authorizedUser = safeGet();
+        if (authorizedUser==null) {
+            return getDefaultUserId();
+        }
+        else {
+            return authorizedUser.getId();
+        }
+    }
+
     public static AuthorizedUser safeGet() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth == null) {
@@ -47,6 +57,10 @@ public class AuthorizedUser extends org.springframework.security.core.userdetail
 
     public UserTo getUserTo() {
         return userTo;
+    }
+
+    public static Integer getDefaultUserId() {
+        return 100000;
     }
 
     @Override

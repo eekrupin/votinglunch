@@ -3,15 +3,12 @@ package com.eekrupin.votinglunch.repository.datajpa;
 import com.eekrupin.votinglunch.model.User;
 import com.eekrupin.votinglunch.model.data.Voting;
 import com.eekrupin.votinglunch.repository.interfaces.VotingRepository;
-import com.eekrupin.votinglunch.util.DateUtil;
 import com.eekrupin.votinglunch.util.exception.WrongFilterException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-
-import static com.eekrupin.votinglunch.util.ValidationUtil.checkNotFound;
 
 @Repository
 public class DataJpaVotingRepositoryImpl implements VotingRepository {

@@ -29,7 +29,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 public class AdminRestVotingControllerTest extends AbstractControllerTest{
 
     private static final String REST_URL = AdminRestVotingController.REST_URL;
@@ -44,7 +43,6 @@ public class AdminRestVotingControllerTest extends AbstractControllerTest{
     public void testGet() throws Exception {
         ResultActions action = mockMvc.perform(get(REST_URL)
                 .param("date", "2017-10-16")
-                .param("user_id", String.valueOf(USER_ID))
                 .with(userHttpBasic(USER)));
 
         action .andDo(print())
@@ -63,7 +61,7 @@ public class AdminRestVotingControllerTest extends AbstractControllerTest{
 
         VotingServiceImpl.setCurrentTimeForTest(LocalTime.of(10, 00));
 
-        VotingTo created = new VotingTo(null, localDate, USER_ID, RESTAURANT_ID2);
+        VotingTo created = new VotingTo(null, localDate, RESTAURANT_ID2);
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(created))
@@ -80,8 +78,7 @@ public class AdminRestVotingControllerTest extends AbstractControllerTest{
     public void testDelete() throws Exception {
         mockMvc.perform(delete(REST_URL)
                 .param("date", "2017-10-16")
-                .param("user_id", String.valueOf(USER_ID))
-                .with(userHttpBasic(ADMIN)))
+                .with(userHttpBasic(USER)))
                 .andDo(print())
                 .andExpect(status().isOk());
 
@@ -89,7 +86,7 @@ public class AdminRestVotingControllerTest extends AbstractControllerTest{
 
         boolean hasError = false;
         try {
-            Voting voting = baseService.get(localDate, USER);
+            Voting voting = baseService.get(localDate);
         }
         catch (Exception e){
             hasError = true;
@@ -123,7 +120,7 @@ public class AdminRestVotingControllerTest extends AbstractControllerTest{
 
         VotingServiceImpl.setCurrentTimeForTest(LocalTime.of(10, 00));
 
-        VotingTo created = new VotingTo(null, localDate, USER_ID, RESTAURANT_ID2);
+        VotingTo created = new VotingTo(null, localDate, RESTAURANT_ID2);
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(created))
@@ -133,7 +130,7 @@ public class AdminRestVotingControllerTest extends AbstractControllerTest{
                 .andExpect(status().isOk());
 
         VotingTo returnedTo = MATCHER_VOTING.fromJsonAction(action);
-        Voting votingFromDb = baseService.get(localDate, USER);
+        Voting votingFromDb = baseService.get(localDate);
 
         Assert.assertEquals(returnedTo.getRestaurant_id(), votingFromDb.getRestaurant().getId());
     }
@@ -145,7 +142,7 @@ public class AdminRestVotingControllerTest extends AbstractControllerTest{
 
         VotingServiceImpl.setCurrentTimeForTest(LocalTime.of(11, 30));
 
-        VotingTo created = new VotingTo(null, localDate, USER_ID, RESTAURANT_ID2);
+        VotingTo created = new VotingTo(null, localDate, RESTAURANT_ID2);
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(created))
@@ -159,15 +156,13 @@ public class AdminRestVotingControllerTest extends AbstractControllerTest{
     }
 
     @Test
-    public void testGetForbidden() throws Exception {
+    public void testGetDataNotFound() throws Exception {
         ResultActions action = mockMvc.perform(get(REST_URL)
                 .param("date", "2017-10-16")
-                .param("user_id", String.valueOf(USER_ID))
                 .with(userHttpBasic(USER2)))
                 .andDo(print())
-                .andExpect(status().isForbidden())
-                .andExpect(errorType(ErrorType.FORBIDDEN))
-                .andExpect(jsonMessage("$.details", "exception.common.forbidden"));
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(errorType(ErrorType.DATA_NOT_FOUND));
     }
 
 }

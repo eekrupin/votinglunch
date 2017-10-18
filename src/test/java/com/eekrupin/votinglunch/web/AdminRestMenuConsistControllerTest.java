@@ -1,29 +1,18 @@
 package com.eekrupin.votinglunch.web;
 
-import com.eekrupin.votinglunch.TestUtil;
-import com.eekrupin.votinglunch.model.Dish;
 import com.eekrupin.votinglunch.model.LunchMenu;
 import com.eekrupin.votinglunch.model.Restaurant;
-import com.eekrupin.votinglunch.service.DishService;
 import com.eekrupin.votinglunch.service.MenuConsistService;
-import com.eekrupin.votinglunch.to.DishTo;
 import com.eekrupin.votinglunch.to.MenuConsistTo;
-import com.eekrupin.votinglunch.util.DishUtil;
 import com.eekrupin.votinglunch.util.MenuConsistUtil;
-import com.eekrupin.votinglunch.util.exception.ErrorType;
-import com.eekrupin.votinglunch.web.dish.AdminRestDishController;
 import com.eekrupin.votinglunch.web.json.JsonUtil;
 import com.eekrupin.votinglunch.web.menuconsist.AdminRestMenuConsistController;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -54,7 +43,6 @@ public class AdminRestMenuConsistControllerTest extends AbstractControllerTest{
                 .param("date", "2017-10-16")
                 .param("restaurant_id", String.valueOf(RESTAURANT_ID))
                 .param("lunchMenu_id", String.valueOf(LUNCH_MENU_ID1))
-                .param("dish_id", String.valueOf(DISH1_R1_ID))
                 .with(userHttpBasic(ADMIN)));
 
         action .andDo(print())
@@ -72,7 +60,6 @@ public class AdminRestMenuConsistControllerTest extends AbstractControllerTest{
                 .param("date", "2017-10-16")
                 .param("restaurant_id", String.valueOf(RESTAURANT_ID))
                 .param("lunchMenu_id", String.valueOf(LUNCH_MENU_ID1))
-                .param("dish_id", String.valueOf(DISH1_R1_ID))
                 .with(userHttpBasic(ADMIN)))
                 .andDo(print())
                 .andExpect(status().isOk());
@@ -90,7 +77,8 @@ public class AdminRestMenuConsistControllerTest extends AbstractControllerTest{
         LocalDate localDate = of(2017, Month.OCTOBER, 16);
 
         MenuConsistTo created1 = new MenuConsistTo(null, localDate, RESTAURANT_ID, LUNCH_MENU_ID1, DISH1_R1_ID);
-        List<MenuConsistTo> menuConsistsTo = Arrays.asList(created1);
+        MenuConsistTo created2 = new MenuConsistTo(null, localDate, RESTAURANT_ID, LUNCH_MENU_ID1, DISH2_R1_ID);
+        List<MenuConsistTo> menuConsistsTo = Arrays.asList(created1, created2);
 
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .param("date", "2017-10-16")

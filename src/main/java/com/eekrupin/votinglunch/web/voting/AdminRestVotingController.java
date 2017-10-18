@@ -34,18 +34,14 @@ public class AdminRestVotingController extends VotingController {
     }
 
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public VotingTo get(@RequestParam(value = "date") LocalDate date,
-                        @RequestParam(value = "user_id") Integer user_id) {
-        User user = votingUtil.getUserRepository().getOne(user_id);
-        Voting voting = super.get(date, user);
+    public VotingTo getVoting(@RequestParam(value = "date") LocalDate date) {
+        Voting voting = super.get(date);
         return votingUtil.asTo(voting);
     }
 
     @DeleteMapping(value = "")
-    public void delete(@RequestParam(value = "date") LocalDate date,
-                       @RequestParam(value = "user_id") Integer user_id) {
-        User user = votingUtil.getUserRepository().getOne(user_id);
-        super.delete(date, user);
+    public void delete(@RequestParam(value = "date") LocalDate date) {
+        super.delete(date);
     }
 
 }

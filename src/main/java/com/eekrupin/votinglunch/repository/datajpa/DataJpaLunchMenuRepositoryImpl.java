@@ -1,7 +1,6 @@
 package com.eekrupin.votinglunch.repository.datajpa;
 
 import com.eekrupin.votinglunch.model.LunchMenu;
-import com.eekrupin.votinglunch.model.Restaurant;
 import com.eekrupin.votinglunch.repository.interfaces.LunchMenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

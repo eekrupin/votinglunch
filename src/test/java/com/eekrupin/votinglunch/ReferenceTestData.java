@@ -52,9 +52,9 @@ public class ReferenceTestData {
     public static final MenuConsistTo MENUCONSIST_D1_R2_3 = new MenuConsistTo(MENUCONSIST_D1_R2_ID3, of(2017, Month.OCTOBER, 16), RESTAURANT_ID2, LUNCH_MENU_ID2, DISH1_R2_ID);
     public static final MenuConsistTo MENUCONSIST_D2_R1_4 = new MenuConsistTo(MENUCONSIST_D2_R1_ID4, of(2017, Month.OCTOBER, 17), RESTAURANT_ID, LUNCH_MENU_ID1, DISH1_R1_ID);
 
-    public static final VotingTo VOTING_U1_D1 = new VotingTo(VOTING_U1_D1_ID1, of(2017, Month.OCTOBER, 16),USER_ID, RESTAURANT_ID);
-    public static final VotingTo VOTING_U1_D2 = new VotingTo(VOTING_U1_D2_ID2, of(2017, Month.OCTOBER, 17),USER_ID, RESTAURANT_ID2);
-    public static final VotingTo VOTING_U2_D1 = new VotingTo(VOTING_U2_D1_ID3, of(2017, Month.OCTOBER, 16),ADMIN_ID, RESTAURANT_ID);
+    public static final VotingTo VOTING_U1_D1 = new VotingTo(VOTING_U1_D1_ID1, of(2017, Month.OCTOBER, 16),RESTAURANT_ID);
+    public static final VotingTo VOTING_U1_D2 = new VotingTo(VOTING_U1_D2_ID2, of(2017, Month.OCTOBER, 17),RESTAURANT_ID2);
+    public static final VotingTo VOTING_U2_D1 = new VotingTo(VOTING_U2_D1_ID3, of(2017, Month.OCTOBER, 16),RESTAURANT_ID);
 
     public static final BeanMatcher<ReferenceEntity> MATCHER = BeanMatcher.of(ReferenceEntity.class,
             (expected, actual) -> expected == actual ||
@@ -92,7 +92,6 @@ public class ReferenceTestData {
     public static final BeanMatcher<VotingTo> MATCHER_VOTING = BeanMatcher.of(VotingTo.class,
             (expected, actual) -> expected == actual ||
                     (Objects.equals(expected.getDate(), actual.getDate())
-                            && Objects.equals(expected.getUser_id(), actual.getUser_id())
                             && Objects.equals(expected.getRestaurant_id(), actual.getRestaurant_id())
                     )
     );

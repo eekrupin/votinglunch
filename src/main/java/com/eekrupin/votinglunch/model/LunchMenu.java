@@ -1,7 +1,5 @@
 package com.eekrupin.votinglunch.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -9,9 +7,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-//@NamedQueries({
-//        @NamedQuery(name = LunchMenu.ALL, query = "SELECT el FROM LunchMenu el where el.restaurant = :restaurant")
-//})
 @Table(name = "lunchmenus")
 public class LunchMenu extends ReferenceEntity {
 

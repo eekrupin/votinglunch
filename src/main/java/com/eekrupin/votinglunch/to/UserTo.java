@@ -1,13 +1,9 @@
 package com.eekrupin.votinglunch.to;
 
 import com.eekrupin.votinglunch.View;
-import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
-import com.eekrupin.votinglunch.util.UserUtil;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 

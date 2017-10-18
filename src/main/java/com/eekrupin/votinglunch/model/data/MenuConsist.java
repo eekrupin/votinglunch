@@ -10,7 +10,6 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.text.Format;
 import java.time.LocalDate;
 
 @Entity
@@ -54,10 +53,10 @@ public class MenuConsist extends AbstractBaseEntity {
     public String toString() {
         return "MenuConsist{" +
                 "id='" + getId() + '\'' +
-                "date='" + DateUtil.toString(getDate()) + '\'' +
-                "restaurant='" + (getRestaurant().isNew() ? "(new)" : getRestaurant().getDescription()) + '\'' +
-                "lunchMenu='" + (getLunchMenu().isNew() ? "(new)" : getLunchMenu().getDescription()) + '\'' +
-                "dish='" + (getDish().isNew() ? "(new)" : getDish().getDescription()) + '\'' +
+                ", date='" + DateUtil.toString(getDate()) + '\'' +
+                ", restaurant='" + (getRestaurant().isNew() ? "(new)" : getRestaurant().getDescription()) + '\'' +
+                ", lunchMenu='" + (getLunchMenu().isNew() ? "(new)" : getLunchMenu().getDescription()) + '\'' +
+                ", dish='" + (getDish().isNew() ? "(new)" : getDish().getDescription()) + '\'' +
                 '}';
     }
 

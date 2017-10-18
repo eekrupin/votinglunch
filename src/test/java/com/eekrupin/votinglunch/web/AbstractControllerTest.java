@@ -35,13 +35,7 @@ abstract public class AbstractControllerTest {
         CHARACTER_ENCODING_FILTER.setForceEncoding(true);
     }
 
-    //@Autowired(required = false)
-    //private JpaUtil jpaUtil;
-
     protected MockMvc mockMvc;
-
-//    @Autowired
-//    protected UserService userService;
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -57,14 +51,6 @@ abstract public class AbstractControllerTest {
                 .apply(springSecurity())
                 .build();
     }
-
-//    @Before
-//    public void setUp() {
-//        userService.evictCache();
-//        if (jpaUtil != null) {
-//            jpaUtil.clear2ndLevelHibernateCache();
-//        }
-//    }
 
     protected String getMessage(String code) {
         return messageUtil.getMessage(code, MessageUtil.RU_LOCALE);

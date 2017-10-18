@@ -5,7 +5,6 @@ import com.eekrupin.votinglunch.model.User;
 import com.eekrupin.votinglunch.to.UserTo;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalTime;
 import java.util.Properties;
 

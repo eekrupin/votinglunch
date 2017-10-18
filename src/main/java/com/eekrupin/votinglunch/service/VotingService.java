@@ -8,8 +8,8 @@ public interface VotingService {
 
     Voting save(Voting voting);
 
-    boolean delete(LocalDate date, User user);
+    boolean delete(LocalDate date);
 
-    Voting get(LocalDate date, User user);
+    Voting get(LocalDate date);
 
 }

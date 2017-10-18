@@ -17,7 +17,7 @@ public class Restaurant extends ReferenceEntity {
     public String toString() {
         return "Restaurant{" +
                 "id='" + getId() + '\'' +
-                "description='" + description + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

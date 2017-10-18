@@ -28,9 +28,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-
-
-
 public class AdminRestLunchMenuControllerTest extends AbstractControllerTest{
 
     private static final String REST_URL = AdminRestLunchMenuController.REST_URL + '/';
@@ -61,7 +58,8 @@ public class AdminRestLunchMenuControllerTest extends AbstractControllerTest{
                 .with(userHttpBasic(ADMIN))
                 .content(JsonUtil.writeValue(created))
                 )
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andDo(print());
 
         LunchMenuTo returned = MATCHER_MENU.fromJsonAction(action);
         created.setId(returned.getId());
@@ -83,6 +81,21 @@ public class AdminRestLunchMenuControllerTest extends AbstractControllerTest{
                 .andExpect(status().isUnprocessableEntity())
                 .andExpect(errorType(ErrorType.VALIDATION_ERROR))
                 .andDo(print());
+    }
+
+    @Test
+    public void testUpdate() throws Exception {
+        LunchMenuTo updated = new LunchMenuTo(LUNCH_MENU_ID1, RESTAURANT_ID, "New menu");
+        ResultActions action = mockMvc.perform(put(REST_URL + LUNCH_MENU_ID1)
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(ADMIN))
+                .content(JsonUtil.writeValue(updated))
+                )
+                .andExpect(status().isOk())
+                .andDo(print());
+
+        MATCHER_MENU.assertEquals( updated, lunchMenuUtil.asTo(baseService.get(LUNCH_MENU_ID1)) );
+
     }
 
     @Test
@@ -135,7 +148,8 @@ public class AdminRestLunchMenuControllerTest extends AbstractControllerTest{
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER_MENU.contentListMatcher(LUNCH_MENU1, LUNCH_MENU2)));
+                .andExpect(MATCHER_MENU.contentListMatcher(LUNCH_MENU1, LUNCH_MENU2)))
+                .andDo(print());
     }
 
     @Test
@@ -144,6 +158,7 @@ public class AdminRestLunchMenuControllerTest extends AbstractControllerTest{
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER_MENU.contentListMatcher(LUNCH_MENU1)));
+                .andExpect(MATCHER_MENU.contentListMatcher(LUNCH_MENU1)))
+        .andDo(print());
     }
 }
