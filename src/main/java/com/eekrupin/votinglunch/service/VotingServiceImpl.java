@@ -16,6 +16,7 @@ import org.springframework.util.Assert;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import static com.eekrupin.votinglunch.util.ValidationUtil.CheckUserOnAuthority;
 import static com.eekrupin.votinglunch.util.ValidationUtil.checkNotFound;
 
 @Service
@@ -35,7 +36,7 @@ public class VotingServiceImpl implements VotingService{
     @Transactional
     public Voting save(Voting voting) {
         Assert.notNull(voting, "voting must not be null");
-
+        CheckUserOnAuthority(voting.getUser());
         LocalTime time = currentTimeForTest == null ? LocalTime.now() : getCurrentTimeForTest();
         if (time.isAfter(expirationTimeVoting)) {
             throw new TimeExpiredException("Current time: " + LocalTime.now().toString());
@@ -53,17 +54,16 @@ public class VotingServiceImpl implements VotingService{
     public boolean delete(LocalDate date, User user) {
         Assert.notNull(date, "date must not be null");
         Assert.notNull(user, "user must not be null");
+        CheckUserOnAuthority(user);
         return repository.delete(date, user);
     }
 
     @Override
     public Voting get(LocalDate date, User user) {
-        //TODO change this
-        if ( !user.getId().equals(AuthorizedUser.id()) ){
-            throw new ForbiddenException();
-        }
+        CheckUserOnAuthority(user);
         return checkNotFound(repository.get(date, user), String.format("date: %s, user: %s", DateUtil.toString(date), user.getId()));
     }
+
 
     public static void setCurrentTimeForTest(LocalTime currentTimeForTest) {
         VotingServiceImpl.currentTimeForTest = currentTimeForTest;

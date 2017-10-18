@@ -5,7 +5,8 @@ public enum ErrorType {
     DATA_NOT_FOUND("error.dataNotFound"),
     DATA_ERROR("error.dataError"),
     VALIDATION_ERROR("error.validationError"),
-    TIME_EXPIRED("error.timeExpiredError");
+    TIME_EXPIRED("error.timeExpiredError"),
+    FORBIDDEN("error.forbidden");
 
     private final String errorCode;
 

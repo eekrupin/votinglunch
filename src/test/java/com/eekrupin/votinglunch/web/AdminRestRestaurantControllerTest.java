@@ -77,7 +77,7 @@ public class AdminRestRestaurantControllerTest extends AbstractControllerTest{
 
     @Test
     public void testUpdate() throws Exception {
-        Restaurant updated = new Restaurant(RESTAURANT_ID, "First Restaurant");;
+        Restaurant updated = new Restaurant(RESTAURANT_ID, "First Restaurant");
         updated.setDescription("UpdatedName");
         mockMvc.perform(put(REST_URL + RESTAURANT_ID)
                 .contentType(MediaType.APPLICATION_JSON)

@@ -165,7 +165,9 @@ public class AdminRestVotingControllerTest extends AbstractControllerTest{
                 .param("user_id", String.valueOf(USER_ID))
                 .with(userHttpBasic(USER2)))
                 .andDo(print())
-                .andExpect(status().isForbidden());
+                .andExpect(status().isForbidden())
+                .andExpect(errorType(ErrorType.FORBIDDEN))
+                .andExpect(jsonMessage("$.details", "exception.common.forbidden"));
     }
 
 }

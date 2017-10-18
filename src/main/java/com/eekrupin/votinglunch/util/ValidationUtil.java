@@ -1,6 +1,10 @@
 package com.eekrupin.votinglunch.util;
 
 
+import com.eekrupin.votinglunch.AuthorizedUser;
+import com.eekrupin.votinglunch.model.Role;
+import com.eekrupin.votinglunch.model.User;
+import com.eekrupin.votinglunch.util.exception.ForbiddenException;
 import com.eekrupin.votinglunch.util.exception.NotFoundException;
 import com.eekrupin.votinglunch.HasId;
 
@@ -53,4 +57,13 @@ public class ValidationUtil {
         }
         return result;
     }
+
+    public static void CheckUserOnAuthority(User user) {
+        AuthorizedUser authorizedUser = AuthorizedUser.safeGet();
+        Boolean userFitsTheConditions = authorizedUser!=null && !authorizedUser.getAuthorities().contains(Role.ROLE_ADMIN) && !user.getId().equals(AuthorizedUser.id());
+        if ( userFitsTheConditions ){
+            throw new ForbiddenException("Wrong user: " + user.getId());
+        }
+    }
+
 }
